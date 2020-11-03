@@ -89,5 +89,18 @@ namespace HotelReservationSystem
             }
         }
 
+        /// <summary>
+        /// Display Hotel info
+        /// </summary>
+        /// <param name="hotels"></param>
+        public void DisplayHotels(Hotel[] hotels)
+        {
+            for (int i = 1; i <= hotels.Length; i++)
+            {
+                Console.WriteLine(i + ". " + hotels[i - 1].name);
+            }
+            Console.WriteLine("Rate :" + CalculateTotalRate(hotels[0]));
+        }
+
     }
 }
