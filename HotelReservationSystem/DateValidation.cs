@@ -25,6 +25,10 @@ namespace HotelReservationSystem
                 {
                     throw new HotelReservationException(HotelReservationException.ExceptionType.INVALID_DATE, "Dates are invalid");
                 }
+                if (i > 0 && date < datesValidated[i - 1])
+                {
+                    throw new HotelReservationException(HotelReservationException.ExceptionType.INVALID_DATE, "Dates are invalid");
+                }
                 datesValidated[i] = date;
             }
             return datesValidated;

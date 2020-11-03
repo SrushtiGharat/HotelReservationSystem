@@ -15,19 +15,7 @@ namespace HotelReservationSystem
 
             Console.WriteLine("Hotels Loaded......");
 
-            try
-            {
-                Console.WriteLine("Enter dates in dd-mm--yyyy format");
-                string[] dates = Console.ReadLine().Split(",");
-                
-                Hotel cheapestHotel = hotelSystem.GetCheapestHotel(dates);
-                Console.WriteLine("Cheapest Hotel :");
-                Console.WriteLine(cheapestHotel.name + " ,Rates : " + dates.Length * cheapestHotel.weekdayRatesForRegularCustomer);
-            }
-            catch(HotelReservationException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            UserInterface.UserInput(hotelSystem);
         }
     }
 }
