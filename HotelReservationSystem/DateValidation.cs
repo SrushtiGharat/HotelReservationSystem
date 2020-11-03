@@ -21,11 +21,7 @@ namespace HotelReservationSystem
             for (int i = 0; i < enteredDates.Length; i++)
             {
                 DateTime date = ConvertToDate(enteredDates[i]);
-                if (date < DateTime.Today)
-                {
-                    throw new HotelReservationException(HotelReservationException.ExceptionType.INVALID_DATE, "Dates are invalid");
-                }
-                if (i > 0 && date < datesValidated[i - 1])
+                if (date < DateTime.Today || (i > 0 && date != datesValidated[i - 1].AddDays(1)))
                 {
                     throw new HotelReservationException(HotelReservationException.ExceptionType.INVALID_DATE, "Dates are invalid");
                 }
