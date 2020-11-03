@@ -16,11 +16,7 @@ namespace HotelReservationSystem
                 Hotel[] cheapestHotels = hotelSystem.GetCheapestHotel(dates).ToArray();
                 Console.WriteLine("Cheapest Hotel :");
 
-                for (int i = 1; i <= cheapestHotels.Length; i++)
-                {
-                    Console.WriteLine(i + " " + cheapestHotels[i - 1].name);
-                }
-                Console.WriteLine("Rate :" + hotelSystem.CalculateTotalRate(cheapestHotels[0]));
+                hotelSystem.DisplayHotels(cheapestHotels);
             }
             catch (HotelReservationException e)
             {
