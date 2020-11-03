@@ -75,6 +75,21 @@ namespace HotelReservationSystem
         }
 
         /// <summary>
+        /// Get best rated hotels
+        /// </summary>
+        /// <param name="dates"></param>
+        /// <returns>List Of Hotels</returns>
+        public List<Hotel> GetBestRatedHotel(string[] dates)
+        {
+            DateTime[] validatedDates = dateValidation.ValidateAndReturnDates(dates);
+            SetWeekendsAndWeekdays(validatedDates);
+
+            hotelList.Sort((e1, e2) => e1.rating.CompareTo(e2.rating));
+            int highestRating = hotelList.Last().rating;
+            return hotelList.FindAll(e => e.rating == highestRating);
+        }
+
+        /// <summary>
         /// Calculate total rate of each hotel
         /// </summary>
         /// <param name="hotel"></param>
@@ -106,13 +121,15 @@ namespace HotelReservationSystem
         /// Display Hotel info
         /// </summary>
         /// <param name="hotels"></param>
-        public void DisplayHotels(Hotel[] hotels)
+        public void DisplayHotels(List<Hotel> hotels)
         {
-            for (int i = 1; i <= hotels.Length; i++)
+            int i = 1;
+            Console.WriteLine("Hotels");
+            foreach (Hotel hotel in hotels)
             {
-                Console.WriteLine(i + ". " + hotels[i - 1].name + "\tRating :" + hotels[i - 1].rating);
+                Console.WriteLine(i + ". " + hotel.name + "\tRating :" + hotel.rating + "\tTotal Rate :" + CalculateTotalRate(hotel));
+                i++;
             }
-            Console.WriteLine("Rate :" + CalculateTotalRate(hotels[0]));
         }
 
     }
