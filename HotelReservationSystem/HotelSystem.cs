@@ -35,7 +35,7 @@ namespace HotelReservationSystem
         public Hotel GetCheapestHotel(string[] dates)
         {
             DateTime[] validatedDates = dateValidation.ValidateAndReturnDates(dates);
-            hotelList.Sort((e1, e2) => e1.ratesForRegularCustomer.CompareTo(e2.ratesForRegularCustomer));
+            hotelList.Sort((e1, e2) => e1.weekdayRatesForRegularCustomer.CompareTo(e2.weekdayRatesForRegularCustomer));
             return hotelList.First();
         }
     }
