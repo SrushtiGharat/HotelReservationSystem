@@ -8,7 +8,7 @@ namespace HotelReservationSystem
         {
             Console.WriteLine("Welcome To Hotel Reservation System");
 
-            HotelSystem hotelSystem = new HotelSystem();
+            HotelSystem hotelSystem = new HotelSystem(CustomerType.REGULAR);
             hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
             hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
             hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));

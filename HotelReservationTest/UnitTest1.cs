@@ -6,7 +6,8 @@ namespace HotelReservationTest
     [TestClass]
     public class UnitTest1
     {
-        HotelSystem hotelSystem = new HotelSystem();
+        HotelSystem hotelSystem = new HotelSystem(CustomerType.REGULAR);
+
         [TestMethod]
         public void Given_NameAndRegularRates_Add_Hotel_To_List()
         {
@@ -24,55 +25,12 @@ namespace HotelReservationTest
         }
 
         [TestMethod]
-        public void Given_ValidDate_Should_Return_CheapestHotel()
-        {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
-            string[] dates = "13Nov2020,14Nov2020".Split(",");    //Friday,Saturday
-
-            Hotel[] cheapestHotel = hotelSystem.GetCheapestHotel(dates).ToArray();
-
-            Assert.AreEqual("Lakewood", cheapestHotel[0].name);
-            Assert.AreEqual("Bridgewood", cheapestHotel[1].name);
-            Assert.AreEqual(2, cheapestHotel.Length);
-        }
-
-        [TestMethod]
-        public void Given_ValidDate_Should_Return_CheapestBestRatedHotel()
-        {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
-            string[] dates = "13Nov2020,14Nov2020".Split(",");    //Friday,Saturday
-
-            Hotel[] cheapestHotel = hotelSystem.GetCheapestBestRatedHotel(dates).ToArray();
-
-            Assert.AreEqual(1, cheapestHotel.Length);
-            Assert.AreEqual("Bridgewood", cheapestHotel[0].name);
-        }
-
-        [TestMethod]
-        public void Given_ValidDate_Should_Return_BestRatedHotel()
-        {
-            hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
-            hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
-            hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
-            string[] dates = "13Nov2020,14Nov2020".Split(",");    //Friday,Saturday
-
-            Hotel[] bestRatedHotel = hotelSystem.GetBestRatedHotel(dates).ToArray();
-
-            Assert.AreEqual(1, bestRatedHotel.Length);
-            Assert.AreEqual("Ridgewood", bestRatedHotel[0].name);
-        }
-
-
-        [TestMethod]
         public void Given_NullDates_Should_Return_HotelReservationException()
         {
             hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
             hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
             hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
+
             string[] dates = null;
 
             var exception = Assert.ThrowsException<HotelReservationException>(() => hotelSystem.GetCheapestHotel(dates));
@@ -89,6 +47,7 @@ namespace HotelReservationTest
             hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
             hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
             hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
+
             string[] dates = date.Split(",");
 
             var exception = Assert.ThrowsException<HotelReservationException>(() => hotelSystem.GetCheapestHotel(dates));
@@ -110,5 +69,68 @@ namespace HotelReservationTest
 
             Assert.AreEqual(HotelReservationException.ExceptionType.INVALID_DATE, exception.type);
         }
+
+        [TestMethod]
+        public void Given_ValidDate_Should_Return_CheapestHotel_ForRegularCustomer()
+        {
+            hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
+
+            string[] dates = "13Nov2020,14Nov2020".Split(",");    //Friday,Saturday
+
+            Hotel[] cheapestHotel = hotelSystem.GetCheapestHotel(dates).ToArray();
+
+            Assert.AreEqual("Lakewood", cheapestHotel[0].name);
+            Assert.AreEqual("Bridgewood", cheapestHotel[1].name);
+            Assert.AreEqual(2, cheapestHotel.Length);
+        }
+
+        [TestMethod]
+        public void Given_ValidDate_Should_Return_CheapestBestRatedHotel_ForRegularCustomer()
+        {
+            hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
+
+            string[] dates = "13Nov2020,14Nov2020".Split(",");    //Friday,Saturday
+
+            Hotel[] cheapestHotel = hotelSystem.GetCheapestBestRatedHotel(dates).ToArray();
+
+            Assert.AreEqual(1, cheapestHotel.Length);
+            Assert.AreEqual("Bridgewood", cheapestHotel[0].name);
+        }
+
+        [TestMethod]
+        public void Given_ValidDate_Should_Return_BestRatedHotel_ForRegularCustomer()
+        {
+            hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
+
+            string[] dates = "13Nov2020,14Nov2020".Split(",");    //Friday,Saturday
+
+            Hotel[] bestRatedHotel = hotelSystem.GetBestRatedHotel(dates).ToArray();
+
+            Assert.AreEqual(1, bestRatedHotel.Length);
+            Assert.AreEqual("Ridgewood", bestRatedHotel[0].name);
+        }
+
+        [TestMethod]
+        public void Given_ValidDate_Should_Return_CheapestBestRatedHotel_ForRewardCustomer()
+        {
+            hotelSystem.ctype = CustomerType.REWARD;
+            hotelSystem.AddHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+            hotelSystem.AddHotel(new Hotel("Bridgewood", 150, 50, 110, 150, 4));
+            hotelSystem.AddHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
+
+            string[] dates = "13Nov2020,14Nov2020".Split(",");    //Friday,Saturday
+
+            Hotel[] cheapestHotel = hotelSystem.GetCheapestBestRatedHotel(dates).ToArray();
+
+            Assert.AreEqual(1, cheapestHotel.Length);
+            Assert.AreEqual("Ridgewood", cheapestHotel[0].name);
+        }
     }
 }
+

@@ -11,6 +11,19 @@ namespace HotelReservationSystem
             try
             {
                 Console.WriteLine("...................................");
+                Console.WriteLine("Enter customer type :1.REGULAR  2.REWARD");
+                Console.WriteLine("...................................");
+
+                int customerChoice = Convert.ToInt32(Console.ReadLine());
+
+                if (customerChoice == 1)
+                    hotelSystem.ctype = CustomerType.REGULAR;
+                else if (customerChoice == 2)
+                    hotelSystem.ctype = CustomerType.REWARD;
+                else
+                    throw new HotelReservationException(HotelReservationException.ExceptionType.INVALID_CUSTOMER_TYPE, "Invalid Customer Type");
+
+                Console.WriteLine("...................................");
                 Console.WriteLine("Enter dates in dd-mm--yyyy format");
                 string[] dates = Console.ReadLine().Split(",");
                 Console.WriteLine("...................................");

@@ -7,16 +7,19 @@ namespace HotelReservationSystem
 {
     public class HotelSystem
     {
+        public CustomerType ctype;
         int weekday;
         int weekend;
         DateValidation dateValidation = new DateValidation();
         public List<Hotel> hotelList;
 
         /// <summary>
-        /// Default Constructor
+        /// Parameterised Constructor
         /// </summary>
-        public HotelSystem()
+        /// <param name="ctype"></param>
+        public HotelSystem(CustomerType ctype)
         {
+            this.ctype = ctype;
             hotelList = new List<Hotel>();
         }
 
@@ -96,7 +99,10 @@ namespace HotelReservationSystem
         /// <returns>total rate</returns>
         public int CalculateTotalRate(Hotel hotel)
         {
-            return (weekday * hotel.weekdayRatesForRegularCustomer) + (weekend * hotel.weekendRatesForRegularCustomer);
+            if (ctype == CustomerType.REGULAR)
+                return (weekday * hotel.weekdayRatesForRegularCustomer) + (weekend * hotel.weekendRatesForRegularCustomer);
+            else
+                return (weekday * hotel.weekdayRatesForRewardCustomer) + (weekend * hotel.weekendRatesForRewardCustomer);
         }
 
         /// <summary>
