@@ -9,6 +9,7 @@ namespace HotelReservationSystem
         public string name;
         public int weekdayRatesForRegularCustomer;
         public int weekendRatesForRegularCustomer;
+        public int rating;
 
         /// <summary>
         /// Default Constructor
@@ -18,20 +19,22 @@ namespace HotelReservationSystem
             name = "";
             weekdayRatesForRegularCustomer = 0;
             weekendRatesForRegularCustomer = 0;
-
+            rating = 0;
         }
 
         /// <summary>
-        /// Parameterised Constructor
+        /// 
         /// </summary>
         /// <param name="name"></param>
         /// <param name="weekdayRatesForRegularCustomer"></param>
         /// <param name="weekendRatesForRegularCustomer"></param>
-        public Hotel(string name, int weekdayRatesForRegularCustomer, int weekendRatesForRegularCustomer)
+        /// <param name="rating"></param>
+        public Hotel(string name, int weekdayRatesForRegularCustomer, int weekendRatesForRegularCustomer, int rating)
         {
             this.name = name;
             this.weekdayRatesForRegularCustomer = weekdayRatesForRegularCustomer;
             this.weekendRatesForRegularCustomer = weekendRatesForRegularCustomer;
+            this.rating = rating;
         }
     }
 }

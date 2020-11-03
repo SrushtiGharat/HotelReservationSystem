@@ -10,7 +10,7 @@ namespace HotelReservationSystem
         /// Validate the input dates
         /// </summary>
         /// <param name="enteredDates"></param>
-        /// <returns></returns>
+        /// <returns>List Of Validated Dates</returns>
         public DateTime[] ValidateAndReturnDates(string[] enteredDates)
         {
             if (enteredDates == null)
@@ -38,7 +38,7 @@ namespace HotelReservationSystem
         /// Convert entered string to DateTime type
         /// </summary>
         /// <param name="enteredDate"></param>
-        /// <returns></returns>
+        /// <returns>string in DateTime Format</returns>
         public DateTime ConvertToDate(string enteredDate)
         {
             try
