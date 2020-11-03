@@ -19,7 +19,6 @@ namespace HotelReservationSystem
 
                 int choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("...................................");
-                Console.WriteLine("Hotels :");
 
                 switch (choice)
                 {

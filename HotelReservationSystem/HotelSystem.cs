@@ -108,6 +108,7 @@ namespace HotelReservationSystem
         /// <param name="hotels"></param>
         public void DisplayHotels(Hotel[] hotels)
         {
+            Console.WriteLine("Hotels :");
             for (int i = 1; i <= hotels.Length; i++)
             {
                 Console.WriteLine(i + ". " + hotels[i - 1].name + "\tRating :" + hotels[i - 1].rating);
