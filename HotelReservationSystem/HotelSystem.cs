@@ -62,6 +62,19 @@ namespace HotelReservationSystem
         }
 
         /// <summary>
+        /// Get cheapest best rated hotels
+        /// </summary>
+        /// <param name="dates"></param>
+        /// <returns>List Of Hotels</returns>
+        public List<Hotel> GetCheapestBestRatedHotel(string[] dates)
+        {
+            List<Hotel> cheapestHotels = GetCheapestHotel(dates);
+            cheapestHotels.Sort((e1, e2) => e1.rating.CompareTo(e2.rating));
+            int highestRating = cheapestHotels.Last().rating;
+            return cheapestHotels.FindAll(e => e.rating == highestRating);
+        }
+
+        /// <summary>
         /// Calculate total rate of each hotel
         /// </summary>
         /// <param name="hotel"></param>
@@ -87,6 +100,19 @@ namespace HotelReservationSystem
                 else
                     weekday++;
             }
+        }
+
+        /// <summary>
+        /// Display Hotel info
+        /// </summary>
+        /// <param name="hotels"></param>
+        public void DisplayHotels(Hotel[] hotels)
+        {
+            for (int i = 1; i <= hotels.Length; i++)
+            {
+                Console.WriteLine(i + ". " + hotels[i - 1].name + "\tRating :" + hotels[i - 1].rating);
+            }
+            Console.WriteLine("Rate :" + CalculateTotalRate(hotels[0]));
         }
 
     }
