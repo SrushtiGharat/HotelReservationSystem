@@ -95,7 +95,7 @@ namespace HotelReservationSystem
 
             foreach (DateTime date in dates)
             {
-                if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Saturday)
+                if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
                     weekend++;
                 else
                     weekday++;
