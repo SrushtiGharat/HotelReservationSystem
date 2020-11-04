@@ -17,16 +17,22 @@ namespace HotelReservationSystem
             {
                 throw new HotelReservationException(HotelReservationException.ExceptionType.NULL_DATES, "Dates are null");
             }
-            DateTime[] datesValidated = new DateTime[enteredDates.Length];
-            for (int i = 0; i < enteredDates.Length; i++)
+            DateTime startDate = ConvertToDate(enteredDates[0]);
+            DateTime endDate = ConvertToDate(enteredDates[1]);
+            if (startDate > endDate || startDate < DateTime.Today)
             {
-                DateTime date = ConvertToDate(enteredDates[i]);
-                if (date < DateTime.Today || (i > 0 && date != datesValidated[i - 1].AddDays(1)))
-                {
-                    throw new HotelReservationException(HotelReservationException.ExceptionType.INVALID_DATE, "Dates are invalid");
-                }
-                datesValidated[i] = date;
+                throw new HotelReservationException(HotelReservationException.ExceptionType.INVALID_DATE, "Dates are invalid");
             }
+
+            TimeSpan t = endDate.Date - startDate.Date;
+            int noOfDays = t.Days + 1;
+            DateTime[] datesValidated = new DateTime[noOfDays];
+
+            for (int i = 0; i < noOfDays; i++)
+            {
+                datesValidated[i] = startDate.AddDays(i);
+            }
+
             return datesValidated;
         }
 
